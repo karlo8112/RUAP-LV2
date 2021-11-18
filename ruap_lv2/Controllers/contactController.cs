@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ruap_lv2.Models;
+using ruap_lv2.Services;
 
 namespace ruap_lv2.Controllers
 {
@@ -10,19 +11,15 @@ namespace ruap_lv2.Controllers
     {
         public Contact[] Get()
         {
-            return new Contact[]
-            {
-               new Contact
-               {
-                   Id = 1,
-                   Name = "Glenn Block"
-               },
-               new Contact
-               {
-                   Id = 2,
-                   Name = "Dan Roth"
-               }
-            };
+            return contactRepository.GetAllContacts();
         }
+
+        private ContactRepository contactRepository;
+
+        public contactController()
+        {
+            this.contactRepository = new ContactRepository();
+        }
+
     }
 }
